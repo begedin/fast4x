@@ -6,7 +6,11 @@ path="res://.import/land.png-4dd123599e6691cd3e3cc569fc216626.stex"
 
 [deps]
 
-source_md5="8b77c664e24b8bba3d06b1759c90cdc4"
+source_file="res://Resources/land.png"
+source_md5="d524b815faf4e9cca7ed3a4c6a448a56"
+
+dest_files=[ "res://.import/land.png-4dd123599e6691cd3e3cc569fc216626.stex" ]
+dest_md5="88897ac5399884d05105cf4b1c5e13be"
 
 [params]
 

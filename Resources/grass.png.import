@@ -6,7 +6,11 @@ path="res://.import/grass.png-ea8eb11baefddc112f9bb25c7c5bb84f.stex"
 
 [deps]
 
-source_md5="0b890247b30e45539a651d35963dfeaa"
+source_file="res://Resources/grass.png"
+source_md5="33e82ce017b82270b3362abbf0f671a8"
+
+dest_files=[ "res://.import/grass.png-ea8eb11baefddc112f9bb25c7c5bb84f.stex" ]
+dest_md5="72b04dd8e60abe366d5ad2d50933ab0b"
 
 [params]
 

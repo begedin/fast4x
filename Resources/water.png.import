@@ -6,7 +6,11 @@ path="res://.import/water.png-9089d9ada5e24425e8ca1d4f887dd9dc.stex"
 
 [deps]
 
-source_md5="3fad7f4017c40d4df95a27f869985f57"
+source_file="res://Resources/water.png"
+source_md5="40b219e1b775a526c6ca2deb067f0faf"
+
+dest_files=[ "res://.import/water.png-9089d9ada5e24425e8ca1d4f887dd9dc.stex" ]
+dest_md5="e10b959e1cbea2dee9d27cdd61212432"
 
 [params]
 
