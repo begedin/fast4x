@@ -2,6 +2,8 @@ extends TileMap
 
 export var size = Vector2(30, 30)
 
+var MapGenerator = load("res://Scripts/MapGenerator.gd")
+
 var tile_collection
 var __grid
 var __label		
@@ -10,9 +12,9 @@ class TileCollection:
 	var items = {}
 	var tile_size
 
-func __add_tile(tile, parent, gridxy):
+func __add_tile(tile, parent, q, r):
 	var hex = tile.duplicate()
-	hex.coordinates = Vector2(gridxy.x, gridxy.y)
+	hex.coordinates = Vector2(q, r)
 		
 	var label = self.__label.duplicate()
 	label.set_text("%d, %d" % [hex.q, hex.r])
@@ -20,32 +22,28 @@ func __add_tile(tile, parent, gridxy):
 	hex.add_child(label)
 	parent.add_child(hex)
 	
-func __make_grid():
-	var grid = []
-	var rang
-	for x in range(-1 * floor(self.size.x / 2), floor(self.size.x / 2)):
-		for y in range(-1 * floor(self.size.y / 2), floor(self.size.y / 2)):
-			grid.push_back(Vector2(x, y))
-	return grid
-	
 func __make_label():
 	var label = Label.new()
 	return label
 	
-func __rand_tile():
-	var keys = self.tile_collection.items.keys()
-	var r = int(rand_range(0, keys.size()))
-	return self.tile_collection.items[keys[r]]
+func __get_tile(height):
+	var name
+	if height < 0.5:
+		name = "water"
+	elif height >= 0.5:
+		name = "grass"
+		
+	return self.tile_collection.items[name]
 	
 func make_board():
-	randomize()
 	self.__label = __make_label()
-	self.__grid = __make_grid()
 	
-	for x in range(0, self.size.x + 1):
-		for y in range(0, self.size.y + 1):
-			var tile = self.__rand_tile()
-			self.__add_tile(tile, self, Vector2(x, y))
+	self.__grid = MapGenerator.generate(self.size.x, self.size.y)
+	
+	for x in range(0, self.size.x):
+		for y in range(0, self.size.y):
+			var tile = self.__get_tile(self.__grid[x][y])
+			self.__add_tile(tile, self, x, y)
 
 func fetch_tiles(tile_set_filepath, size_node_name):
 	self.tile_collection = TileCollection.new()
