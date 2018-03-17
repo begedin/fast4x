@@ -12,10 +12,11 @@ static func generate(width, height, roughness = 0.5):
 		var step_size = (ds_size - 1) / pow(2, i)
 		grid = diamond_step(grid, step_size, r)
 		grid = square_step(grid, step_size, r)
+		
+	grid = trim(grid, width, height)
+	return grid
 	
-	return trim(grid, width, height)
-	
-func get_DS_size_and_iters(width, height, max_power_of_two = 13):
+static func get_DS_size_and_iters(width, height, max_power_of_two = 13):
 	if max_power_of_two < 3: max_power_of_two = 3
 	
 	var largest_edge = max(width, height)
@@ -25,7 +26,7 @@ func get_DS_size_and_iters(width, height, max_power_of_two = 13):
 		if largest_edge <= d:
 			return [d, power]
 			
-func init(size):
+static func init(size):
 	var grid = []
 	for x in range(size):
     	grid.push_back([])
@@ -34,13 +35,13 @@ func init(size):
 	
 	return grid
 			
-func seed_corners(grid, size):
+static func seed_corners(grid, size):
 	var m = size - 1
 	
-	grid[0][0] = rand_range(0, 1)
-	grid[m][0] = rand_range(0, 1)
-	grid[0][m] = rand_range(0, 1)
-	grid[m][m] = rand_range(0, 1)
+	grid[0][0] = randf()
+	grid[m][0] = randf()
+	grid[0][m] = randf()
+	grid[m][m] = randf()
 	
 	return grid
 			
@@ -64,7 +65,7 @@ static func diamond_displace(grid, i, j, half_step, roughness):
 	var lr = grid[i + half_step][j + half_step]
 	
 	var average = (ul + ur + ll + lr) / 4.0
-	var rand_val = rand_range(0, 1)
+	var rand_val = randf()
 	
 	return (roughness * rand_val + (1.0 - roughness) * average)
 			
@@ -112,8 +113,10 @@ static func square_displace(grid, i, j, half_step, roughness):
 		divide_by -= 1
 	
 	var average = sum / divide_by
-	var rand_val = rand_range(0, 1)
+	var rand_val = randf()
 	return (roughness * rand_val + (1.0 - roughness) * average)
 	
-static func trim(grid, width, height): 
+static func trim(grid, x, y):
+	grid.resize(x)
+	for row in grid: row.resize(y)
 	return grid

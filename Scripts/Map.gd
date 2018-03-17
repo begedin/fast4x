@@ -2,10 +2,10 @@ extends TileMap
 
 export var size = Vector2(60, 30)
 
-var MapGenerator = load("res://Scripts/MapGenerator.gd")
+var World = load("res://Scripts/World.gd")
 
 var tile_collection
-var __grid
+var __world
 var __label		
 
 class TileCollection:
@@ -26,11 +26,12 @@ func __make_label():
 	var label = Label.new()
 	return label
 	
-func __get_tile(height):
+func __get_tile(world, x, y):
+	var height = world.grid[x][y]
 	var name
-	if height < 0.45:
+	if height < world.sea_level:
 		name = "water"
-	elif height >= 0.45:
+	else:
 		name = "grass"
 		
 	return self.tile_collection.items[name]
@@ -38,11 +39,11 @@ func __get_tile(height):
 func make_board():
 	self.__label = __make_label()
 	
-	self.__grid = MapGenerator.generate(self.size.x, self.size.y)
+	var world = World.new(self.size.x, self.size.y)
 	
 	for x in range(0, self.size.x):
 		for y in range(0, self.size.y):
-			var tile = self.__get_tile(self.__grid[x][y])
+			var tile = self.__get_tile(world, x, y)
 			self.__add_tile(tile, self, x, y)
 
 func fetch_tiles(tile_set_filepath, size_node_name):
