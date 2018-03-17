@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/HexTile.gd" type="Script" id=2]
 [ext_resource path="res://Resources/grass.png" type="Texture" id=3]
 
-[node name="TileSet" type="Node2D"]
+[node name="TileSet" type="Node2D" index="0"]
 
 _sections_unfolded = [ "Transform", "Z Index" ]
 
