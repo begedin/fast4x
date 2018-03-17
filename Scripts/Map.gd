@@ -1,43 +1,24 @@
 extends TileMap
 
-export var size = Vector2(4, 4)
+export var size = Vector2(30, 30)
 
 var tile_collection
 var __grid
-var __label
-
-class Hex:
-	var q
-	var r
-	var size
-		
-	func _init(q, r, diameter):
-		self.q = q
-		self.r = r
-		self.size = diameter / 2
-		
-	func pixels():
-		var x = self.size * 3/2 * self.q
-		var offset = int(self.q) % 2 / 2.0
-		var y = self.size * sqrt(3) * (self.r + offset) 
-		return Vector2(x, y)
-		
+var __label		
 
 class TileCollection:
 	var items = {}
 	var tile_size
 
 func __add_tile(tile, parent, gridxy):
-	var tile_dup = tile.duplicate()
-	var hex = Hex.new(gridxy.x, gridxy.y, self.tile_collection.tile_size.x)
-	tile_dup.set_position(hex.pixels())
-	
+	var hex = tile.duplicate()
+	hex.coordinates = Vector2(gridxy.x, gridxy.y)
+		
 	var label = self.__label.duplicate()
-	label.set_text("%d, %d" % [gridxy.x, gridxy.y])
+	label.set_text("%d, %d" % [hex.q, hex.r])
 	
-	tile_dup.add_child(label)
-	
-	parent.add_child(tile_dup)
+	hex.add_child(label)
+	parent.add_child(hex)
 	
 func __make_grid():
 	var grid = []
