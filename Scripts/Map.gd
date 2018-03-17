@@ -1,6 +1,6 @@
 extends TileMap
 
-export var size = Vector2(30, 30)
+export var size = Vector2(60, 30)
 
 var MapGenerator = load("res://Scripts/MapGenerator.gd")
 
@@ -28,9 +28,9 @@ func __make_label():
 	
 func __get_tile(height):
 	var name
-	if height < 0.5:
+	if height < 0.45:
 		name = "water"
-	elif height >= 0.5:
+	elif height >= 0.45:
 		name = "grass"
 		
 	return self.tile_collection.items[name]

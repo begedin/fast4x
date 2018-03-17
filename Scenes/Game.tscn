@@ -31,7 +31,7 @@ format = 1
 tile_data = PoolIntArray(  )
 script = ExtResource( 3 )
 _sections_unfolded = [ "Cell", "Transform" ]
-size = Vector2( 30, 30 )
+size = Vector2( 60, 30 )
 
 [node name="UI" type="CanvasLayer" parent="." index="1"]
 

@@ -1,11 +1,12 @@
-func generate(x, y):
+
+
+static func generate(x, y):
 	randomize()
 	var grid = []
 	var rang
-	for i in range(0, x):
-		grid.push_back([])
-		for j in range(0, y):
-			grid[i].push_back(rand_range(0, 1))
 	
-	return grid
+	var DiamondSquare = load("res://Scripts/DiamondSquare.gd")
+	var height_map = DiamondSquare.generate(x, y, 0.65)
+	
+	return height_map
 	
